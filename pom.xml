@@ -117,6 +117,13 @@
             <version>${aspectj.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring5 -->
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring5</artifactId>
+            <version>3.0.15.RELEASE</version>
+        </dependency>
+
     </dependencies>
 
     <build>

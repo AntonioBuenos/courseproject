@@ -1,5 +1,6 @@
 package by.smirnov.courseproject.configuration;
 
+import com.zaxxer.hikari.HikariConfig;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
