@@ -1,4 +1,4 @@
-package by.smirnov.courseproject.models;
+package by.smirnov.courseproject.model;
 
 import lombok.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -13,6 +13,8 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
+
+    //необходимо будет вставить валидаторы
     private long id;
     private String firstName;
     private String lastName;
