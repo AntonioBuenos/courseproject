@@ -2,12 +2,14 @@ package by.smirnov.courseproject.repository;
 
 import by.smirnov.courseproject.model.User;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static by.smirnov.courseproject.repository.user.UserTableColumns.*;
 
+@Component
 public class UserRowMapper implements RowMapper<User> {
 
     //Logger to be added
