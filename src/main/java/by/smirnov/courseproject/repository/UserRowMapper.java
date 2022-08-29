@@ -1,4 +1,4 @@
-package by.smirnov.courseproject.dao;
+package by.smirnov.courseproject.repository;
 
 import by.smirnov.courseproject.model.User;
 import org.springframework.jdbc.core.RowMapper;
@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static by.smirnov.courseproject.dao.user.UserTableColumns.*;
+import static by.smirnov.courseproject.repository.user.UserTableColumns.*;
 
 public class UserRowMapper implements RowMapper<User> {
 

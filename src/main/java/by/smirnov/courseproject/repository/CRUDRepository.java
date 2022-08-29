@@ -1,4 +1,4 @@
-package by.smirnov.courseproject.dao;
+package by.smirnov.courseproject.repository;
 
 import java.util.List;
 import java.util.Optional;

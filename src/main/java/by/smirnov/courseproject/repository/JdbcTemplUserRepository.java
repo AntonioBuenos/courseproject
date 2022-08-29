@@ -1,6 +1,6 @@
-package by.smirnov.courseproject.dao;
+package by.smirnov.courseproject.repository;
 
-import by.smirnov.courseproject.dao.user.UserRepositoryInterface;
+import by.smirnov.courseproject.repository.user.UserRepositoryInterface;
 import by.smirnov.courseproject.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -33,12 +33,12 @@ public class JdbcTemplUserRepository implements UserRepositoryInterface {
 
     @Override
     public List<User> findAll() {
-        return null;
+        return findAll(DEFAULT_FIND_ALL_LIMIT, DEFAULT_FIND_ALL_OFFSET);
     }
 
     @Override
     public List<User> findAll(int limit, int offset) {
-        return null;
+        return jdbcTemplate.query("select * from guitarshop.users limit " + limit + " offset " + offset, userRowMapper);
     }
 
     @Override

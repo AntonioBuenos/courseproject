@@ -1,6 +1,6 @@
-package by.smirnov.courseproject.dao.user;
+package by.smirnov.courseproject.repository.user;
 
-import by.smirnov.courseproject.dao.CRUDRepository;
+import by.smirnov.courseproject.repository.CRUDRepository;
 import by.smirnov.courseproject.model.User;
 
 import java.util.Map;

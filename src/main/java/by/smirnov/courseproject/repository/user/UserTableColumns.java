@@ -1,4 +1,4 @@
-package by.smirnov.courseproject.dao.user;
+package by.smirnov.courseproject.repository.user;
 
 public interface UserTableColumns {
     String ID = "id";
