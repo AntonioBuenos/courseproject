@@ -1,6 +1,5 @@
-package by.smirnov.courseproject.repository;
+package by.smirnov.courseproject.repository.user;
 
-import by.smirnov.courseproject.repository.user.UserRepositoryInterface;
 import by.smirnov.courseproject.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -97,5 +96,9 @@ public class JdbcTemplUserRepository implements UserRepositoryInterface {
     @Override
     public Map<String, Object> getUserStats() {
         return null;
+    }
+
+    public List<User> showDeletedUsers() {
+        return jdbcTemplate.query("select * from guitarshop.users where is_deleted=true order by id", userRowMapper);
     }
 }

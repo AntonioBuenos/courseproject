@@ -1,4 +1,4 @@
-package by.smirnov.courseproject.repository;
+package by.smirnov.courseproject.repository.user;
 
 import by.smirnov.courseproject.model.User;
 import org.springframework.jdbc.core.RowMapper;

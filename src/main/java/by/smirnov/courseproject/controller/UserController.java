@@ -1,7 +1,7 @@
 package by.smirnov.courseproject.controller;
 
 import by.smirnov.courseproject.model.User;
-import by.smirnov.courseproject.repository.JdbcTemplUserRepository;
+import by.smirnov.courseproject.repository.user.JdbcTemplUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +21,12 @@ public class UserController {
     public String index(Model model) {
         model.addAttribute("users", repository.findAll());
         return "users/index";
+    }
+
+    @GetMapping("/deleted")
+    public String showDeleted(Model model) {
+        model.addAttribute("notUsers", repository.showDeletedUsers());
+        return "users/deleted";
     }
 
     @GetMapping("/{id}")
