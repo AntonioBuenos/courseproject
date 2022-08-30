@@ -18,7 +18,6 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import javax.sql.DataSource;
 
 @Configuration
-//@Import({DatabaseProperties.class})
 @EnableWebMvc
 public class ConnectionPoolConfig implements WebMvcConfigurer {
 

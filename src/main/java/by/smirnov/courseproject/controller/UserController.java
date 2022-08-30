@@ -25,8 +25,8 @@ public class UserController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") long id, Model model) {
-        model.addAttribute("person", repository.findById(id));
-        return "people/show";
+        model.addAttribute("user", repository.findById(id));
+        return "users/show";
     }
 
     @GetMapping("/new")

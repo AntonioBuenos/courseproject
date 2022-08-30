@@ -22,8 +22,7 @@ public class JdbcTemplUserRepository implements UserRepositoryInterface {
 
     @Override
     public User findById(Long id) {
-        return jdbcTemplate.queryForObject("select * from guitarshop.users where id = " + id
-                + " and is_deleted = false", userRowMapper);
+        return jdbcTemplate.queryForObject("select * from guitarshop.users where id = " + id, userRowMapper);
     }
 
     @Override
@@ -38,9 +37,11 @@ public class JdbcTemplUserRepository implements UserRepositoryInterface {
 
     @Override
     public List<User> findAll(int limit, int offset) {
-        return jdbcTemplate.query("select * from guitarshop.users limit " + limit + " offset " + offset, userRowMapper);
+        return jdbcTemplate.query("select * from guitarshop.users where is_deleted = false order by id limit "
+                + limit + " offset " + offset, userRowMapper);
     }
 
+    //зачем нам в CRUDRepository возврат этих значений? User? Если мы возвращаемые данные нигде не используем?
     @Override
     public User create(User object) {
         final String insertQuery =
@@ -48,30 +49,48 @@ public class JdbcTemplUserRepository implements UserRepositoryInterface {
                         " values (:firstName, :lastName);";
 
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-        mapSqlParameterSource.addValue("first_name", object.getFirstName());
-        mapSqlParameterSource.addValue("last_name", object.getLastName());
+        mapSqlParameterSource.addValue("firstName", object.getFirstName());
+        mapSqlParameterSource.addValue("lastName", object.getLastName());
 
         namedParameterJdbcTemplate.update(insertQuery, mapSqlParameterSource);
 
-        Long lastInsertId = namedParameterJdbcTemplate.query("SELECT currval('carshop.users_id_seq') as last_id",
+/*        Long lastInsertId = namedParameterJdbcTemplate.query("SELECT currval('guitarshop.users_id_seq') as last_id",
                 resultSet -> {
                     resultSet.next();
                     return resultSet.getLong("last_id");
-                });
+                });*/
 
-        return findById(lastInsertId);
+        //return findById(lastInsertId);
+        return null;
     }
 
     @Override
     public User update(User object) {
+        final String updateQuery =
+                "update guitarshop.users set first_name=:firstName, last_name=:lastName, user_role=:userRole, " +
+                        "modification_date=current_timestamp where id=:id";
+
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("firstName", object.getFirstName());
+        mapSqlParameterSource.addValue("lastName", object.getLastName());
+        mapSqlParameterSource.addValue("userRole", object.getUserRole());
+        mapSqlParameterSource.addValue("id", object.getId());
+
+        namedParameterJdbcTemplate.update(updateQuery, mapSqlParameterSource);
+        return null;
+    }
+//Зачем нам MapSqlParameterSource и NamedParameterJdbcTemplate,
+// если jdbcTemplate тоже позволяет сделать Prepared Statement с "?"?
+/*    @Override
+    public User update(User object) {
         jdbcTemplate.update("UPDATE guitarshop.users SET first_name=?, last_name=?, user_role=? WHERE id=?",
                 object.getFirstName(), object.getLastName(), object.getUserRole(), object.getId());
-        return object;
-    }
+        return null;
+    }*/
 
     @Override
     public Long delete(Long id) {
-        jdbcTemplate.update("UPDATE guitarshop.users SET is_deleted=true WHERE id=?", id);
+        jdbcTemplate.update("update guitarshop.users set is_deleted=true, termination_date=current_timestamp where id=?", id);
         return id;
     }
 
