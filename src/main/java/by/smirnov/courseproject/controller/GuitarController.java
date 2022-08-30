@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/guitars")
 public class GuitarController {
@@ -59,5 +61,16 @@ public class GuitarController {
     public String delete(@PathVariable("id") long id) {
         repository.delete(id);
         return "redirect:/guitars";
+    }
+
+    @GetMapping("/stats")
+    public String getAveragePrice(Model model) {
+        double result = 0.0;
+        Map<String, Object> userStats = repository.showAverageGuitarPrice();
+        for (Map.Entry<String, Object> stringObjectEntry : userStats.entrySet()) {
+            result = (double) stringObjectEntry.getValue();
+        }
+        model.addAttribute("avg", result);
+        return "guitars/stats";
     }
 }

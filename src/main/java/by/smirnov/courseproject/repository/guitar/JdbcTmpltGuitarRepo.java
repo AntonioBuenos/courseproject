@@ -7,12 +7,14 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class JdbcTmpltGuitarRepo implements GuitarRepoInterface{
+public class JdbcTmpltGuitarRepo implements GuitarRepoInterface {
 
     private final JdbcTemplate jdbcTemplate;
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -92,5 +94,13 @@ public class JdbcTmpltGuitarRepo implements GuitarRepoInterface{
     public Long delete(Long id) {
         jdbcTemplate.update("update guitarshop.guitars set is_deleted=true, termination_date=current_timestamp where id=?", id);
         return id;
+    }
+
+    @Override
+    public Map<String, Object> showAverageGuitarPrice() {
+        return jdbcTemplate.query("select guitarshop.get_guitars_stats_average_price(true)", resultSet -> {
+            resultSet.next();
+            return Collections.singletonMap("avg", resultSet.getDouble(1));
+        });
     }
 }
