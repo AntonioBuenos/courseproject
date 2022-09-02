@@ -1,6 +1,7 @@
 package by.smirnov.courseproject.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -19,7 +20,9 @@ public class SpeedCountAspect {
     @Around("aroundGuitarRepoPointcut()")
     public Object guitarMethodSpeedController(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        System.out.println(joinPoint.toShortString());
+        Signature signature = joinPoint.getSignature();
+        String methodPackage = signature.getDeclaringTypeName();
+        String method = signature.getName();
 
         StopWatch sw = new StopWatch();
         sw.start();
@@ -27,7 +30,8 @@ public class SpeedCountAspect {
         Object proceed = joinPoint.proceed();
 
         sw.stop();
-        System.out.println(sw.prettyPrint());
+        System.out.println(String.format("Время выполнения метода %s пакета %s: %n%s",
+                method, methodPackage, sw.prettyPrint()));
 
         return proceed;
     }
@@ -39,12 +43,17 @@ public class SpeedCountAspect {
     @Around("aroundUserRepoPointcut()")
     public Object userMethodSpeedController(ProceedingJoinPoint joinPoint) throws Throwable {
 
+        Signature signature = joinPoint.getSignature();
+        String methodPackage = signature.getDeclaringTypeName();
+        String method = signature.getName();
+
         long startTime = System.currentTimeMillis();
 
         Object proceed = joinPoint.proceed();
 
         long endTime = System.currentTimeMillis();
-        System.out.println("Время выполнения метода = " + joinPoint.toShortString() + " " + (endTime - startTime) + " ms.");
+        System.out.println(String.format("Время выполнения метода %s пакета %s: %d ms.",
+                method, methodPackage, (endTime - startTime)));
 
         return proceed;
     }
