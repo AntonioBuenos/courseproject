@@ -65,12 +65,7 @@ public class GuitarController {
 
     @GetMapping("/stats")
     public String getAveragePrice(Model model) {
-        double result = 0.0;
-        Map<String, Object> userStats = repository.showAverageGuitarPrice();
-        for (Map.Entry<String, Object> stringObjectEntry : userStats.entrySet()) {
-            result = (double) stringObjectEntry.getValue();
-        }
-        model.addAttribute("avg", result);
+        model.addAttribute("avg", String.format("%.2f", repository.showAverageGuitarPrice()) + "$");
         return "guitars/stats";
     }
 }

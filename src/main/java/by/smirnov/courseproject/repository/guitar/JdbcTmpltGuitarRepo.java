@@ -7,9 +7,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -96,11 +94,19 @@ public class JdbcTmpltGuitarRepo implements GuitarRepoInterface {
         return id;
     }
 
-    @Override
+    /*@Override
     public Map<String, Object> showAverageGuitarPrice() {
         return jdbcTemplate.query("select guitarshop.get_guitars_stats_average_price(true)", resultSet -> {
             resultSet.next();
             return Collections.singletonMap("avg", resultSet.getDouble(1));
+        });
+    }*/
+
+    @Override
+    public Double showAverageGuitarPrice() {
+        return jdbcTemplate.query("select avg(price) avg_price from guitarshop.guitars", resultSet -> {
+            resultSet.next();
+            return resultSet.getDouble(1);
         });
     }
 }
