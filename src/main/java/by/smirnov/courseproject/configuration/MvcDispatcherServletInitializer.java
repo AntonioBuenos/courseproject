@@ -1,3 +1,4 @@
+/*
 package by.smirnov.courseproject.configuration;
 
 import org.springframework.web.filter.HiddenHttpMethodFilter;
@@ -34,3 +35,4 @@ public class MvcDispatcherServletInitializer extends AbstractAnnotationConfigDis
                 new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null ,true, "/*");
     }
 }
+*/

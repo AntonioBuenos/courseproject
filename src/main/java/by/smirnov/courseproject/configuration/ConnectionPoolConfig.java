@@ -1,3 +1,4 @@
+/*
 package by.smirnov.courseproject.configuration;
 
 import com.zaxxer.hikari.HikariDataSource;
@@ -76,3 +77,4 @@ public class ConnectionPoolConfig implements WebMvcConfigurer {
     }
 
 }
+*/

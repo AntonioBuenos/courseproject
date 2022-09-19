@@ -1,3 +1,4 @@
+/*
 package by.smirnov.courseproject.configuration;
 
 import org.springframework.context.annotation.ComponentScan;
@@ -11,3 +12,4 @@ import org.springframework.context.annotation.Import;
 @ComponentScan("by.smirnov.courseproject")
 public class ApplicationContextStarter {
 }
+*/
