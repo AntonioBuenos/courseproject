@@ -1,5 +1,7 @@
 package by.smirnov.courseproject.model;
 
+import by.smirnov.courseproject.model.enums.GoodStatus;
+import by.smirnov.courseproject.model.enums.Placement;
 import lombok.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -23,10 +25,12 @@ public class Instock {
     @Column(name = "good_id")
     private long goodId;
 
-    private String placement;
+    @Enumerated(EnumType.STRING)
+    private Placement placement;
 
     @Column(name = "good_status")
-    private String goodStatus;
+    @Enumerated(EnumType.STRING)
+    private GoodStatus goodStatus;
 
     @Column(name = "creation_date")
     private Timestamp creationDate;

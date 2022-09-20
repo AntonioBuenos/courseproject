@@ -1,5 +1,6 @@
 package by.smirnov.courseproject.model;
 
+import by.smirnov.courseproject.model.enums.MusicGenre;
 import lombok.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -20,7 +21,8 @@ public class Genre {
     private long id;
 
     @Column(name = "music_genre")
-    private String musicGenre;
+    @Enumerated(EnumType.STRING)
+    private MusicGenre musicGenre;
 
     @Column(name = "creation_date")
     private Timestamp creationDate;

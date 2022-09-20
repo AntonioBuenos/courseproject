@@ -1,5 +1,6 @@
 package by.smirnov.courseproject.model;
 
+import com.neovisionaries.i18n.CountryCode;
 import lombok.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -42,7 +43,8 @@ public class Guitar {
     private double price;
 
     @Column(name = "prod_country")
-    private String prodCountry;
+    @Enumerated(EnumType.STRING)
+    private CountryCode prodCountry;
 
     @Column(name = "brand_id")
     private long brandId;

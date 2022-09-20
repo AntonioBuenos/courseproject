@@ -1,5 +1,6 @@
 package by.smirnov.courseproject.model;
 
+import by.smirnov.courseproject.model.enums.OrderStatus;
 import lombok.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -39,7 +40,8 @@ public class Order {
     private Timestamp terminationDate;
 
     @Column(name = "order_status")
-    private boolean orderStatus;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
     @Override
     public String toString() {

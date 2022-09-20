@@ -1,11 +1,13 @@
 package by.smirnov.courseproject.model;
 
+import com.neovisionaries.i18n.CountryCode;
 import lombok.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Locale;
 
 @Getter
 @Setter
@@ -24,7 +26,8 @@ public class GuitarManufacturer {
     private String company;
 
     @Column(name = "origin_country")
-    private String originCountry;
+    @Enumerated(EnumType.STRING)
+    private CountryCode originCountry;
 
     @Column(name = "creation_date")
     private Timestamp creationDate;

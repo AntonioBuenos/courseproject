@@ -1,5 +1,6 @@
 package by.smirnov.courseproject.model;
 
+import by.smirnov.courseproject.model.enums.Role;
 import lombok.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -27,7 +28,8 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Column(name = "creation_date")
     private Timestamp creationDate;

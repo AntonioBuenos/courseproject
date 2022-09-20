@@ -1,5 +1,5 @@
 package by.smirnov.courseproject.model.enums;
 
-public enum Roles {
+public enum Role {
     ROLE_ADMIN, ROLE_CUSTOMER, ROLE_SALES_CLERC, ROLE_ANONYMOUS
 }
