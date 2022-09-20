@@ -66,7 +66,7 @@ public class JdbcTemplUserRepository implements UserRepositoryInterface {
     @Override
     public User update(User object) {
         final String updateQuery =
-                "update guitarshop.users set first_name=:firstName, last_name=:lastName, user_role=:userRole, " +
+                "update guitarshop.users set first_name=:firstName, last_name=:lastName, role=:userRole, " +
                         "modification_date=current_timestamp where id=:id";
 
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
