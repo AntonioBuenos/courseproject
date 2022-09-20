@@ -17,7 +17,7 @@ public class PersistenceProvidersConfiguration {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 
         // Package contain entity classes
-        factoryBean.setPackagesToScan("com.noirix");
+        factoryBean.setPackagesToScan("by.smirnov.courseproject.model");
         factoryBean.setDataSource(dataSource);
         factoryBean.setHibernateProperties(getAdditionalProperties());
         factoryBean.afterPropertiesSet();

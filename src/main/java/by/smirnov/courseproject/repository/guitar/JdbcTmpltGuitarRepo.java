@@ -44,8 +44,7 @@ public class JdbcTmpltGuitarRepo implements GuitarRepoInterface {
         final String insertQuery =
                 "insert into guitarshop.guitars (typeof, shape, series, model, strings_qnt, neck, bridge, " +
                         "body_material, price, prod_country, brand_id) " +
-                        " values (:typeOf, :shape, :series, :model, :stringsQnt, :neck, :bridge, \" +\n" +
-                        "                        \":bodyMaterial, :price, :prodCountry, :brandId);";
+                        " values (:typeOf, :shape, :series, :model, :stringsQnt, :neck, :bridge, :bodyMaterial, :price, :prodCountry, :brandId);";
 
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("typeOf", object.getTypeOf());
@@ -68,7 +67,9 @@ public class JdbcTmpltGuitarRepo implements GuitarRepoInterface {
     @Override
     public Guitar update(Guitar object) {
         final String updateQuery =
-                "update guitarshop.users set first_name=:firstName, last_name=:lastName, user_role=:userRole, " +
+                "update guitarshop.guitars set typeof=:typeOf, shape=:shape, series=:series, " +
+                        "model=:model, strings_qnt=:stringsQnt, neck=:neck, bridge=:bridge, body_material=:bodyMaterial, " +
+                        "price=:price, prod_country=:prodCountry, brand_id=:brandId," +
                         "modification_date=current_timestamp where id=:id";
 
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
