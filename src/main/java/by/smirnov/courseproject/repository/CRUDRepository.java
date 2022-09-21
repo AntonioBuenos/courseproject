@@ -10,7 +10,7 @@ public interface CRUDRepository <K, T>{
     Optional<T> findOne(K id);
     List<T> findAll();
     List<T> findAll(int limit, int offset);
-    T create(T object);
-    T update(T object);
-    K delete(K id);
+    void create(T object);
+    void update(T object);
+    void delete(K id);
 }

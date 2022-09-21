@@ -1,7 +1,6 @@
 package by.smirnov.courseproject.controller;
 
 import by.smirnov.courseproject.model.User;
-import by.smirnov.courseproject.repository.user.JdbcTemplUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

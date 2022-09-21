@@ -1,7 +1,6 @@
 package by.smirnov.courseproject.controller;
 
 import by.smirnov.courseproject.model.Guitar;
-import by.smirnov.courseproject.repository.guitar.JdbcTmpltGuitarRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
