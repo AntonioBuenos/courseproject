@@ -2,15 +2,12 @@ package by.smirnov.guitarshopproject.controller;
 
 import by.smirnov.guitarshopproject.dto.GuitarDTO;
 import by.smirnov.guitarshopproject.model.Guitar;
-import by.smirnov.guitarshopproject.repository.guitar.HibernateGuitarRepo;
+import by.smirnov.guitarshopproject.service.GuitarService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.stream.Collectors;
 
 import static by.smirnov.guitarshopproject.controller.ControllerConstants.*;
 
@@ -18,20 +15,20 @@ import static by.smirnov.guitarshopproject.controller.ControllerConstants.*;
 @RequiredArgsConstructor
 @RequestMapping(MAPPING_GUITARS)
 public class GuitarController {
-    private final HibernateGuitarRepo repository;
+    private final GuitarService service;
 
     private final ModelMapper modelMapper;
 
     @GetMapping()
     public String index(Model model) {
         model.addAttribute(GUITARS,
-                repository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList()));
+                service.findAll().stream().map(this::convertToDTO).toList());
         return "guitars/index";
     }
 
     @GetMapping(MAPPING_ID)
     public String show(@PathVariable(ID) long id, Model model) {
-        model.addAttribute(GUITAR, convertToDTO(repository.findById(id)));
+        model.addAttribute(GUITAR, convertToDTO(service.findById(id)));
         return "guitars/show";
     }
 
@@ -43,13 +40,13 @@ public class GuitarController {
     //insert validation
     @PostMapping()
     public String create(@ModelAttribute(GUITAR) GuitarDTO guitarDTO) {
-        repository.create(convertToEntity(guitarDTO));
+        service.create(convertToEntity(guitarDTO));
         return REDIRECT_GUITARS;
     }
 
     @GetMapping(MAPPING_EDIT)
     public String edit(Model model, @PathVariable(ID) long id) {
-        model.addAttribute(GUITAR, repository.findById(id));
+        model.addAttribute(GUITAR, service.findById(id));
         return "guitars/edit";
     }
 
@@ -57,20 +54,20 @@ public class GuitarController {
     @PatchMapping(MAPPING_ID)
     public String update(@ModelAttribute(GUITAR) GuitarDTO guitarDTO,
                          @PathVariable(ID) long id) {
-        repository.update(convertToEntity(guitarDTO));
+        service.update(convertToEntity(guitarDTO));
         return REDIRECT_GUITARS;
     }
 
     @DeleteMapping(MAPPING_ID)
     public String delete(@PathVariable(ID) long id) {
-        repository.delete(id);
+        service.delete(id);
         return REDIRECT_GUITARS;
     }
 
     //В сервис
     @GetMapping("/stats")
     public String getAveragePrice(Model model) {
-        model.addAttribute("avg", String.format("%.2f", repository.showAverageGuitarPrice()) + "$");
+        model.addAttribute("avg", String.format("%.2f", service.showAverageGuitarPrice()) + "$");
         return "guitars/stats";
     }
 
