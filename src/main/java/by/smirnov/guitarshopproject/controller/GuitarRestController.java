@@ -14,9 +14,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static by.smirnov.guitarshopproject.controller.ControllerConstants.*;
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/rest/guitars")
+@RequestMapping(MAPPING_REST_GUITARS)
 public class GuitarRestController {
     private final HibernateGuitarRepo repository;
 
@@ -30,8 +32,8 @@ public class GuitarRestController {
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<GuitarDTO> show(@PathVariable("id") long id) {
+    @GetMapping(MAPPING_ID)
+    public ResponseEntity<GuitarDTO> show(@PathVariable(ID) long id) {
         GuitarDTO guitarDTO = convertToDTO(repository.findById(id));
         return guitarDTO != null
                 ? new ResponseEntity<>(guitarDTO, HttpStatus.OK)
@@ -46,8 +48,8 @@ public class GuitarRestController {
     }
 
     //insert validation
-    @PatchMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") int id, @RequestBody GuitarDTO guitarDTO) {
+    @PatchMapping(MAPPING_ID)
+    public ResponseEntity<?> update(@PathVariable(name = ID) int id, @RequestBody GuitarDTO guitarDTO) {
         Guitar guitar = convertToEntity(guitarDTO);
         final boolean updated = Objects.nonNull(repository.update(guitar));
         return updated
@@ -55,8 +57,8 @@ public class GuitarRestController {
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") long id) {
+    @DeleteMapping(MAPPING_ID)
+    public ResponseEntity<?> delete(@PathVariable(ID) long id) {
         Guitar guitar = repository.findById(id);
         if (!guitar.isDeleted()) {
             repository.delete(id);

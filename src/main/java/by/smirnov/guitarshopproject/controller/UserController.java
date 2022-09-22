@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Collectors;
 
+import static by.smirnov.guitarshopproject.controller.ControllerConstants.*;
+
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/users")
+@RequestMapping(MAPPING_USERS)
 public class UserController {
     private final HibernateUserRepo repository;
 
@@ -21,7 +23,7 @@ public class UserController {
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("users",
+        model.addAttribute(USERS,
                 repository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList()));
         return "users/index";
     }
@@ -33,42 +35,42 @@ public class UserController {
         return "users/deleted";
     }
 
-    @GetMapping("/{id}")
-    public String show(@PathVariable("id") long id, Model model) {
+    @GetMapping(MAPPING_ID)
+    public String show(@PathVariable(ID) long id, Model model) {
         model.addAttribute("user", convertToDTO(repository.findById(id)));
         return "users/show";
     }
 
-    @GetMapping("/new")
-    public String newUser(@ModelAttribute("user") UserDTO userDTO) {
+    @GetMapping(MAPPING_NEW)
+    public String newUser(@ModelAttribute(USER) UserDTO userDTO) {
         return "users/new";
     }
 
     //insert validation
     @PostMapping()
-    public String create(@ModelAttribute("user") UserDTO userDTO) {
+    public String create(@ModelAttribute(USER) UserDTO userDTO) {
         repository.create(convertToEntity(userDTO));
-        return "redirect:/users";
+        return REDIRECT_USERS;
     }
 
-    @GetMapping("/{id}/edit")
-    public String edit(Model model, @PathVariable("id") long id) {
-        model.addAttribute("user", repository.findById(id));
+    @GetMapping(MAPPING_EDIT)
+    public String edit(Model model, @PathVariable(ID) long id) {
+        model.addAttribute(USER, repository.findById(id));
         return "users/edit";
     }
 
     //insert validation
-    @PatchMapping("/{id}")
-    public String update(@ModelAttribute("user") UserDTO userDTO,
-                         @PathVariable("id") long id) {
+    @PatchMapping(MAPPING_ID)
+    public String update(@ModelAttribute(USER) UserDTO userDTO,
+                         @PathVariable(ID) long id) {
         repository.update(convertToEntity(userDTO));
-        return "redirect:/users";
+        return REDIRECT_USERS;
     }
 
-    @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") long id) {
+    @DeleteMapping(MAPPING_ID)
+    public String delete(@PathVariable(ID) long id) {
         repository.delete(id);
-        return "redirect:/users";
+        return REDIRECT_USERS;
     }
 
     private User convertToEntity(UserDTO userDTO){
