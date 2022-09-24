@@ -4,6 +4,8 @@ import by.smirnov.guitarshopproject.model.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 public class UserDTO {
@@ -15,4 +17,5 @@ public class UserDTO {
     private Role role;
     private String login;
     private String password;
+    private Timestamp terminationDate;
 }
