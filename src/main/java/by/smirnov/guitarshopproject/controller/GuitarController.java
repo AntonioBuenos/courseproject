@@ -64,10 +64,9 @@ public class GuitarController {
         return REDIRECT_GUITARS;
     }
 
-    //В сервис
     @GetMapping("/stats")
     public String getAveragePrice(Model model) {
-        model.addAttribute("avg", String.format("%.2f", service.showAverageGuitarPrice()) + "$");
+        model.addAttribute("avg", service.showAverageGuitarPrice());
         return "guitars/stats";
     }
 

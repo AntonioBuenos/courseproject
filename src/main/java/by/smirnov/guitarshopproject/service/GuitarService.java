@@ -37,11 +37,7 @@ public class GuitarService {
         hibernateGuitarRepo.delete(id);
     }
 
-    public Double showAverageGuitarPrice() {
-/*        Session session = sessionFactory.getCurrentSession();
-
-        List<Double> result = session.createQuery("select avg(p.price) from Guitar p where p.isDeleted = false", Double.class)
-                .getResultList();*/
-        return hibernateGuitarRepo.showAverageGuitarPrice();
+    public String showAverageGuitarPrice() {
+        return String.format("%.2f", hibernateGuitarRepo.showAverageGuitarPrice()) + "$";
     }
 }

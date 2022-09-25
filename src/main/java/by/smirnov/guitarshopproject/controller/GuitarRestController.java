@@ -27,7 +27,7 @@ public class GuitarRestController {
     public ResponseEntity<?> index() {
         List<GuitarDTO> guitars =  service.findAll().stream().map(this::convertToDTO).toList();
         return guitars != null &&  !guitars.isEmpty()
-                ? new ResponseEntity<>(Collections.singletonMap("guitars", guitars), HttpStatus.OK)
+                ? new ResponseEntity<>(Collections.singletonMap(GUITARS, guitars), HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
@@ -69,8 +69,7 @@ public class GuitarRestController {
     @GetMapping("/stats")
     public ResponseEntity<?> getAveragePrice() {
         return new ResponseEntity<>
-                (Collections.singletonMap("avg", String.format("%.2f", service.showAverageGuitarPrice()) + "$"),
-                        HttpStatus.OK);
+                (Collections.singletonMap("avg", service.showAverageGuitarPrice()), HttpStatus.OK);
     }
 
     private Guitar convertToEntity(GuitarDTO guitarDTO){
