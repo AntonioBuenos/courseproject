@@ -66,10 +66,10 @@ public class GuitarRestController {
         return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
-    @GetMapping("/stats")
+    @GetMapping(MAPPING_STATS)
     public ResponseEntity<?> getAveragePrice() {
         return new ResponseEntity<>
-                (Collections.singletonMap("avg", service.showAverageGuitarPrice()), HttpStatus.OK);
+                (Collections.singletonMap(AVG, service.showAverageGuitarPrice()), HttpStatus.OK);
     }
 
     private Guitar convertToEntity(GuitarDTO guitarDTO){

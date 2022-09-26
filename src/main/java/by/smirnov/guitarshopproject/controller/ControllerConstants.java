@@ -7,6 +7,7 @@ public interface ControllerConstants {
     String MAPPING_REST_GUITARS = "/rest/guitars";
     String MAPPING_GUITARS = "/guitars";
     String MAPPING_DELETED = "/deleted";
+    String MAPPING_STATS = "/stats";
     String MAPPING_ID = "/{id}";
     String MAPPING_EDIT = "/{id}/edit";
     String MAPPING_NEW = "/new";
@@ -17,4 +18,10 @@ public interface ControllerConstants {
     String GUITARS = "guitars";
     String USER = "user";
     String USERS = "users";
+    String AVG = "avg";
+    String NOT_USERS = "notUsers";
+    String VIEW_GUITARS_STATS = "guitars/stats";
+    String VIEW_GUITARS_EDIT = "guitars/edit";
+    String VIEW_GUITARS_SHOW = "guitars/show";
+    String VIEW_GUITARS_INDEX = "guitars/index";
 }

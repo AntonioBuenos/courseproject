@@ -28,14 +28,14 @@ public class UserController {
 
     @GetMapping(MAPPING_DELETED)
     public String showDeleted(Model model) {
-        model.addAttribute("notUsers",
+        model.addAttribute(NOT_USERS,
                 service.showDeletedUsers().stream().map(this::convertToDTO).toList());
         return "users/deleted";
     }
 
     @GetMapping(MAPPING_ID)
     public String show(@PathVariable(ID) long id, Model model) {
-        model.addAttribute("user", convertToDTO(service.findById(id)));
+        model.addAttribute(USER, convertToDTO(service.findById(id)));
         return "users/show";
     }
 

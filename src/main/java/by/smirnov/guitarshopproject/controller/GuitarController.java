@@ -23,13 +23,13 @@ public class GuitarController {
     public String index(Model model) {
         model.addAttribute(GUITARS,
                 service.findAll().stream().map(this::convertToDTO).toList());
-        return "guitars/index";
+        return VIEW_GUITARS_INDEX;
     }
 
     @GetMapping(MAPPING_ID)
     public String show(@PathVariable(ID) long id, Model model) {
         model.addAttribute(GUITAR, convertToDTO(service.findById(id)));
-        return "guitars/show";
+        return VIEW_GUITARS_SHOW;
     }
 
     @GetMapping(MAPPING_NEW)
@@ -47,7 +47,7 @@ public class GuitarController {
     @GetMapping(MAPPING_EDIT)
     public String edit(Model model, @PathVariable(ID) long id) {
         model.addAttribute(GUITAR, service.findById(id));
-        return "guitars/edit";
+        return VIEW_GUITARS_EDIT;
     }
 
     //insert validation
@@ -64,10 +64,10 @@ public class GuitarController {
         return REDIRECT_GUITARS;
     }
 
-    @GetMapping("/stats")
+    @GetMapping(MAPPING_STATS)
     public String getAveragePrice(Model model) {
-        model.addAttribute("avg", service.showAverageGuitarPrice());
-        return "guitars/stats";
+        model.addAttribute(AVG, service.showAverageGuitarPrice());
+        return VIEW_GUITARS_STATS;
     }
 
     private Guitar convertToEntity(GuitarDTO guitarDTO){
