@@ -26,7 +26,7 @@ public class UserController {
         return "users/index";
     }
 
-    @GetMapping("/deleted")
+    @GetMapping(MAPPING_DELETED)
     public String showDeleted(Model model) {
         model.addAttribute("notUsers",
                 service.showDeletedUsers().stream().map(this::convertToDTO).toList());

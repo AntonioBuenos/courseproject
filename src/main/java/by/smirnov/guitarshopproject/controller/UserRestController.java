@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -63,6 +64,14 @@ public class UserRestController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+    }
+
+    @GetMapping(MAPPING_DELETED)
+    public ResponseEntity<?> showDeleted() {
+        List<UserDTO> deletedUsers = service.showDeletedUsers().stream().map(this::convertToDTO).toList();
+        return deletedUsers != null && !deletedUsers.isEmpty()
+                ? new ResponseEntity<>(Collections.singletonMap(USERS, deletedUsers), HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     private User convertToEntity(UserDTO userDTO){
