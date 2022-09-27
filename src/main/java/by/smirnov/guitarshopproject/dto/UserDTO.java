@@ -1,5 +1,6 @@
 package by.smirnov.guitarshopproject.dto;
 
+import by.smirnov.guitarshopproject.model.PersonalData;
 import by.smirnov.guitarshopproject.model.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,4 +19,5 @@ public class UserDTO {
     private String login;
     private String password;
     private Timestamp terminationDate;
+    private PersonalData personalData;
 }

@@ -1,9 +1,11 @@
 package by.smirnov.guitarshopproject.model;
 
 import by.smirnov.guitarshopproject.model.enums.Role;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -21,6 +23,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @OneToOne(mappedBy = "user")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @JsonManagedReference
+    private PersonalData personalData;
 
     @Column(name = "first_name")
     private String firstName;
